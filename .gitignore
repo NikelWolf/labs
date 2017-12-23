@@ -1,0 +1,14 @@
+*.o
+.*
+*.log
+ls
+tree
+file_reader
+http_server
+matrix_calc
+calc
+tconvert
+text_finder
+turing_machine
+tree
+!.gitignore

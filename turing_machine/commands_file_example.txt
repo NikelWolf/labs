@@ -1,0 +1,6 @@
+inc 
+begin
+print
+inc
+end
+get
