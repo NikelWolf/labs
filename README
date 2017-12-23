@@ -1,9 +1,9 @@
-|_____________________________________________________________________________________________________|
-|source code and makefile reciepes for labs and practice lessons                                       |
-|=====================================================================================================|
-|to build print in terminal in labs dir: make -B                                                      |
-|to clear all build files print: make clear                                                            |
-|<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><|
-|to create separate project print project name, for example: make tree                                |
-|to clear separate project build files print project name with end _clear, for example: make tree_clear|
-|_____________________________________________________________________________________________________|
+|_________________________________________________________________________________________|
+|source code and makefile reciepes for labs and practice lessons                          |
+|=========================================================================================|
+|to build print in terminal in labs dir: make -B                                          |
+|to clear all build files print: make clear                                               |
+|<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><|
+|to create separate project print project name, for example: make tree                    |
+|to clear separate project build files print project name with end _clear: make tree_clear|
+|_________________________________________________________________________________________|
