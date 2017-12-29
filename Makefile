@@ -15,9 +15,6 @@ file_reader_clear:
 	cd file_reader && make clear
 
 http_get_server:
-	echo "!!WARNING!!"
-	echo "current server version is unstable and may fail"
-	echo
 	cd http_get_server && make
 
 http_get_server_clear:
