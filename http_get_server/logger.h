@@ -18,5 +18,7 @@ void log_client_connection(const char *client_ip);
 void log_client_disconnection(const char *client_ip);
 void log_request(const char *client_ip, const char *request);
 void log_response(const char *client_ip, const char *response);
+void log_shutdown();
+void log_server_start();
 
 #endif

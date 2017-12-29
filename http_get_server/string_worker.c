@@ -32,10 +32,10 @@ char **string_split(const char *line, const char *separators, int max_split) {
                     tmp_array[i] = array[i];
                 }
                 tmp_array[array_size-1] = strdup(token);
-    
+
                 free(array);
                 array = tmp_array;
-                
+
                 array_size++;
                 max_split--;
             }
@@ -52,9 +52,9 @@ char **string_split(const char *line, const char *separators, int max_split) {
 
 char *string_lstrip(const char *string) {
     int not_whitespace_index = 0;
-    int i;
+    size_t i;
     for(i = 0; i < strlen(string); i++) {
-        if(isspace(string[i])) 
+        if(isspace(string[i]))
             not_whitespace_index++;
         else
             break;
@@ -86,7 +86,10 @@ char *string_lrstrip(const char *string) {
     return rstriped_string;
 }
 
-int string_array_length(char **string_array) {
+int string_array_length(const char **string_array) {
+    if(!string_array)
+        return 0;
+
     int length = 0;
     while(*string_array++) {
         length++;
@@ -103,24 +106,43 @@ void string_free_splited_array(char **string_array) {
     free(string_array);
 }
 
+char **string_copy_array(const char **array) {
+    int array_length = string_array_length((const char **) array) + 1;
+
+    char **copy_array = (char **) calloc(array_length, sizeof(char *));
+
+    int i;
+    for(i = 0; i < array_length-1; i++) {
+        copy_array[i] = string_copy(array[i]);
+    }
+
+    return copy_array;
+}
+
 int string_find(const char *string, const char *aim) {
     char *tmp;
     if(!(tmp = strstr(string, aim)))
         return -1;
-    else 
+    else
         return (int) (tmp - string);
 }
 
 char *string_slice(const char *string, int start, int end) {
-    if(start >= strlen(string) || start < 0 || (end <= start && end >= 0))
+    if((size_t) start >= strlen(string) || start < 0 || (end <= start && end >= 0))
         return strdup("");
 
-    if(end > strlen(string) || end < 0)
+    if((size_t) end > strlen(string))
         end = strlen(string);
+
+    if(end < 0) {
+        end = end % strlen(string);
+
+        end = strlen(string) - end;
+    }
 
     char *new_string = (char *) calloc(end-start, sizeof(char));
     strncpy(new_string, string+start, end-start);
-    
+
     return new_string;
 }
 
@@ -136,7 +158,7 @@ char *string_reverse(const char *string) {
 int string_startswith(const char *string, const char *aim) {
     if(string_find(string, aim) == 0)
         return 1;
-    
+
     return 0;
 }
 
@@ -149,12 +171,12 @@ int string_endswith(const char *string, const char *aim) {
     int result = 0;
     if(string_find(rev_string, rev_aim) != -1 && string_find(rev_string, rev_aim) == 0)
         result = 1;
-    else 
+    else
         result = 0;
 
     free(rev_string);
     free(rev_aim);
-    
+
     return result;
 }
 
@@ -179,7 +201,7 @@ int string_count(const char *string, const char *aim) {
 
 char *string_copy(const char *string) {
     char *new_string = (char *) calloc((strlen(string) + 1), sizeof(char));
-    
+
     strcpy(new_string, string);
 
     return new_string;
