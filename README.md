@@ -28,40 +28,40 @@ Source code for mirea labs. Each folder with `Makefile` is a separate lab or tas
 [tree]: <https://github.com/NikelWolf/labs/labs_1_term/tree/>
 [turing_machine]: <https://github.com/NikelWolf/labs/labs_1_term/turing_machine/>
 
-[T2l1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab1/
-[T2l2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab2/
-[T2l3]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab3/
-[T2l4]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab4/
-[T2l5]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab5/
-[T2l6]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab6/
-[T2l7]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab7/
-[T2l8]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab8/
+[T2l1]: https://github.com/NikelWolf/labs/labs_2_term/lab1/
+[T2l2]: https://github.com/NikelWolf/labs/labs_2_term/lab2/
+[T2l3]: https://github.com/NikelWolf/labs/labs_2_term/lab3/
+[T2l4]: https://github.com/NikelWolf/labs/labs_2_term/lab4/
+[T2l5]: https://github.com/NikelWolf/labs/labs_2_term/lab5/
+[T2l6]: https://github.com/NikelWolf/labs/labs_2_term/lab6/
+[T2l7]: https://github.com/NikelWolf/labs/labs_2_term/lab7/
+[T2l8]: https://github.com/NikelWolf/labs/labs_2_term/lab8/
 
-[T2l1t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab1/task1/
-[T2l1t2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab1/task2/
+[T2l1t1]: https://github.com/NikelWolf/labs/labs_2_term/lab1/task1/
+[T2l1t2]: https://github.com/NikelWolf/labs/labs_2_term/lab1/task2/
 
-[T2l2t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab2/task1/
-[T2l2t2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab2/task2/
+[T2l2t1]: https://github.com/NikelWolf/labs/labs_2_term/lab2/task1/
+[T2l2t2]: https://github.com/NikelWolf/labs/labs_2_term/lab2/task2/
 
-[T2l3t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab3/task1/
-[T2l3t2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab3/task2/
-[T2l3t3]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab3/task3/
-[T2l3t4]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab3/task4/
+[T2l3t1]: https://github.com/NikelWolf/labs/labs_2_term/lab3/task1/
+[T2l3t2]: https://github.com/NikelWolf/labs/labs_2_term/lab3/task2/
+[T2l3t3]: https://github.com/NikelWolf/labs/labs_2_term/lab3/task3/
+[T2l3t4]: https://github.com/NikelWolf/labs/labs_2_term/lab3/task4/
 
-[T2l4t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab4/task1/
-[T2l4t2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab4/task2/
-[T2l4t3]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab4/task3/
-[T2l4t4]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab4/task4/
+[T2l4t1]: https://github.com/NikelWolf/labs/labs_2_term/lab4/task1/
+[T2l4t2]: https://github.com/NikelWolf/labs/labs_2_term/lab4/task2/
+[T2l4t3]: https://github.com/NikelWolf/labs/labs_2_term/lab4/task3/
+[T2l4t4]: https://github.com/NikelWolf/labs/labs_2_term/lab4/task4/
 
-[T2l5t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab5/task1/
-[T2l5t2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab5/task2/
+[T2l5t1]: https://github.com/NikelWolf/labs/labs_2_term/lab5/task1/
+[T2l5t2]: https://github.com/NikelWolf/labs/labs_2_term/lab5/task2/
 
-[T2l6t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab6/task1/
-[T2l6t2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab6/task2/
-[T2l6t3]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab6/task3/
+[T2l6t1]: https://github.com/NikelWolf/labs/labs_2_term/lab6/task1/
+[T2l6t2]: https://github.com/NikelWolf/labs/labs_2_term/lab6/task2/
+[T2l6t3]: https://github.com/NikelWolf/labs/labs_2_term/lab6/task3/
 
-[T2l7t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab7/task1/
+[T2l7t1]: https://github.com/NikelWolf/labs/labs_2_term/lab7/task1/
 
-[T2l8t1]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab8/task1/
-[T2l8t2]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab8/task2/
-[T2l8t3]: https://github.com/NikelWolf/labs/labs_2_term/base_labs/lab8/task3/
+[T2l8t1]: https://github.com/NikelWolf/labs/labs_2_term/lab8/task1/
+[T2l8t2]: https://github.com/NikelWolf/labs/labs_2_term/lab8/task2/
+[T2l8t3]: https://github.com/NikelWolf/labs/labs_2_term/lab8/task3/
