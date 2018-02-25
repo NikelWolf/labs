@@ -17,7 +17,7 @@ Source code for mirea labs. Each folder with `Makefile` is a separate lab or tas
 |[tree][tree]                                      |                                                               |
 |[turing machine][turing_machine]                  |                                                               |
 
-[calendar]: <https://github.com/NikelWolf/labs/labs_1_term/calendar/>
+[calendar]: <labs_1_term/calendar/>
 [file_reader]: <https://github.com/NikelWolf/labs/labs_1_term/file_reader/>
 [http_get_server]: <https://github.com/NikelWolf/labs/labs_1_term/http_get_server/>
 [ls]: <https://github.com/NikelWolf/labs/labs_1_term/ls/>
