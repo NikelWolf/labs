@@ -11,9 +11,9 @@ Source code for mirea labs. Each folder with `Makefile` is a separate lab or tas
 |[simple http get server][http_get_server]         |[3][T2l3] => [1][T2l3t1], [2][T2l3t2], [3][T2l3t3], [4][T2l3t4]|
 |[ls][ls]                                          |[4][T2l4] => [1][T2l4t1], [2][T2l4t2], [3][T2l4t3], [4][T2l4t4]|
 |[matrix calculator][matrix_calculator]            |[5][T2l5] => [1][T2l5t1], [2][T2l5t2]                          |
-|[stack calculator][stack_calculator]              |[6][T2l6] => [1][T2l6t1], [2][T2l6t2], [3][T2l6t3]             |
+|[stack calculator][stack_calculator]              |[6][T2l6] => [1][T2l6t1], [2][T2l6t2](not implemented now), [3][T2l6t3](not implemented now)|
 |[converter for temperature][temperature_converter]|[7][T2l7] => [1][T2l7t1]                                       |
-|[text finder][text_finder]                        |[8][T2l8] => [1][T2l8t1], [2][T2l8t2], [3][T2l8t3]             |
+|[text finder][text_finder]                        |[8][T2l8] => [1][T2l8t1](not implemented now), [2][T2l8t2](not implemented now), [3][T2l8t3](not implemented now)|
 |[tree][tree]                                      |                                                               |
 |[turing machine][turing_machine]                  |                                                               |
 
