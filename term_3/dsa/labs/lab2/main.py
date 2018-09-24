@@ -12,7 +12,10 @@ def is_prime(n):
 
 
 def main():
-    n = int(input('n: '))
+    n = 0
+    while n < 1:
+        n = int(input('n: '))
+
     a = [int(number.strip()) for number in input('a: ').split()[:n]]
     print(list(e for e in a if is_prime(e)))
 
