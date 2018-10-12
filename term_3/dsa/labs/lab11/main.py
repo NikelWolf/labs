@@ -1,8 +1,7 @@
+import sys
 from pprint import pprint
 from dataclasses import dataclass
-from typing import List
 from datetime import datetime
-import sys
 from bisect import bisect
 
 
