@@ -58,7 +58,7 @@ class Bank:
 
 
 def find_bank(banks, account_number):
-    return bisect(banks, Bank(account_number, 0, None, None)) - 1
+    return bisect(banks, Bank(account_number, 0, None, None))
 
 
 def main():
@@ -71,6 +71,7 @@ def main():
     account_number = int(input('bank to find: '))
     print('bank index:', find_bank(banks, account_number))
     Bank.to_file(banks, 'tmp.dat', 'b')
+    print('binary:')
     pprint(Bank.from_file('tmp.dat', 'b'))
 
 
