@@ -3,8 +3,8 @@ from pprint import pprint
 
 
 def main():
-    n, m = int(input('n: ')), int(input('m: '))
-    f = str if '--str' in sys.argv else int
+    n, m = int(input("n: ")), int(input("m: "))
+    f = str if "--str" in sys.argv else int
     a = [[f(e) for e in input().split()[:m]] for _ in range(n)]
     for i in range(m):
         col = [a[j][i] for j in range(n)]
@@ -14,5 +14,5 @@ def main():
     pprint(a)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
