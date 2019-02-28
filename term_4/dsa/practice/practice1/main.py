@@ -3,6 +3,7 @@ from pprint import pprint
 from random import choice, randint, shuffle
 from string import ascii_lowercase
 from typing import List, Tuple
+import math
 
 
 @dataclass(order=True)
@@ -72,7 +73,31 @@ def barrier_search(target_id: int, students: List[Student]) -> Tuple[int, int, b
     return index, counter, students[index].active
 
 
-def binary_search(target_id: int, students: List[Student]) -> Tuple[int, int, bool]:
+def golden_ratio_index_search(target_id: int, students: List[Student], a: int, b: int) -> int:
+    gr = (math.sqrt(5) + 1) / 2
+    x1 = int(b - (b - a) / gr)
+    x2 = int(a + (b - 1) / gr)
+
+    if target_id == students[x1].ID:
+        return x1
+    elif target_id == students[a].ID:
+        return a
+    elif target_id == students[b].ID:
+        return b
+    elif target_id == students[x2].ID:
+        return x2
+    elif target_id < students[x1].ID:
+        return golden_ratio_index_search(target_id, students, a, x1)
+    elif students[x1].ID < target_id < students[x2].ID:
+        return golden_ratio_index_search(target_id, students, x1, x2)
+    elif target_id > students[x2].ID:
+        return golden_ratio_index_search(target_id, students, x2, b)
+    else:
+        return -1
+
+def binary_search(
+    target_id: int, students: List[Student]
+) -> Tuple[int, int, bool]:
     index = counter = 0
     left, right = 0, len(students) - 1
     found = False
@@ -85,7 +110,7 @@ def binary_search(target_id: int, students: List[Student]) -> Tuple[int, int, bo
         if found:
             break
 
-        index = (left + right) // 2
+        index = int((left + right) //2)
         s = students[index]
 
         counter += 1
@@ -135,6 +160,9 @@ def main():
     # task 4
     index, task_4_counter, found = binary_search(search_id, students)
     print_search_results(index, found, search_id, students)
+
+    # task 5
+    print(golden_ratio_index_search(search_id, students, 0, len(students) - 1))
 
     # task 3, 6
     print(
