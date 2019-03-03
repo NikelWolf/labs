@@ -1,9 +1,7 @@
 **/*.o
 **/*.class
 **/out/
-**/.idea/workspace.xml
-**/.idea/usage.statistics.xml
-**/.idea/tasks.xml
 **/__pycache__
 **/.mypy_cache
 **/.idea
+**/.vscode
