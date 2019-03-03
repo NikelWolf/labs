@@ -1,7 +1,7 @@
-PROGRAM=calendar
+PROGRAM=t4-dsa-l1
 OBJECTS=main.o
-CFLAGS=-Wall -Wextra -Werror -std=gnu89
-CC=gcc
+CFLAGS=-Wall -Wextra -Werror -std=c++11
+CC=g++
 
 .PHONY: all clean
 
@@ -10,8 +10,8 @@ all: main
 main: main.o
 	$(CC) -o $(PROGRAM) $(OBJECTS)
 
-main.o: main.c
-	$(CC) -c main.c $(CFALGS)
+main.o: main.cpp
+	$(CC) -c main.cpp $(CFALGS)
 
 clean:
 	$(RM) $(PROGRAM) $(OBJECTS)
