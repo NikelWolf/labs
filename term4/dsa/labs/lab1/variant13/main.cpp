@@ -24,15 +24,16 @@ class LinkedList
 
         Node(ListObject value)
         {
+            next = nullptr;
+            previous = nullptr;
             this->value = value;
         }
     };
 
     LinkedList::Node *first, *last;
-    std::size_t nodes_count;
 
   public:
-    LinkedList() : first{nullptr}, last{nullptr}, nodes_count{0} {}
+    LinkedList() : first{nullptr}, last{nullptr} {}
 
     void add(ListObject value)
     {
@@ -99,27 +100,6 @@ class LinkedList
                 }
             }
         }
-    }
-
-    ListObject get_by_index(std::size_t index)
-    {
-        if (first == nullptr)
-        {
-            throw std::runtime_error{"list is empty"};
-        }
-
-        if (index >= nodes_count)
-        {
-            throw std::runtime_error{"index out of list range"};
-        }
-
-        LinkedList::Node *n = first;
-        for (std::size_t i = 0; i < index; i++)
-        {
-            n = n->next;
-        }
-
-        return n->value;
     }
 
     friend std::ostream &operator<<(std::ostream &os, const LinkedList &list)
