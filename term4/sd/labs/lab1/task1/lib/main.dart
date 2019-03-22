@@ -107,7 +107,7 @@ class Lab1Task1App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MIREA SD Lab 1',
+      title: 'MIREA SD Lab 1 Task 1',
       debugShowCheckedModeBanner: false,
       home: ImagePage(),
       routes: <String, WidgetBuilder>{

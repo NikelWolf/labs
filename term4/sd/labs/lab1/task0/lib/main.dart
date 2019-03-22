@@ -5,9 +5,8 @@ void main() => runApp(Lab1Task0App());
 class Lab1Task0App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
-      title: 'MIREA SD Lab1 Task 0',
+      title: 'MIREA SD Lab 1 Task 0',
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       theme: ThemeData.dark(),
