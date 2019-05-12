@@ -10,7 +10,7 @@
 typedef struct matrix_s {
     int rows_count;
     int column_count;
-    double **array;    
+    double **array;
 } matrix;
 
 matrix *create_matrix(int rows, int columns);

@@ -5,16 +5,17 @@
 using namespace std;
 
 namespace labs_space {
-    class Human {
-    protected:
-        string name;
-        string surname;
-        string midname;
-        int age;
-    public:
-        Human();
-        Human(string name, string surname, string midname, int age);
-        virtual ~Human();
-        virtual void print() = 0;
-    };
-}
+class Human {
+protected:
+    string name;
+    string surname;
+    string midname;
+    int age;
+
+public:
+    Human();
+    Human(string name, string surname, string midname, int age);
+    virtual ~Human();
+    virtual void print() = 0;
+};
+} // namespace labs_space

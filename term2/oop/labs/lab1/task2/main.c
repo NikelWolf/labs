@@ -16,7 +16,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    Complex *numbers = (Complex *) malloc(sizeof(Complex)*n);
+    Complex *numbers = (Complex *)malloc(sizeof(Complex) * n);
     int i;
     char n_s;
     int max = 0;

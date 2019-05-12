@@ -42,8 +42,8 @@ int mult(int *array, int size) {
 }
 
 int main() {
-    int (*f)(int*, int);
-    int array[20] = {1, 2, 1, 2, 14, 5, 4, 5, 452, 54, 1, 54, 21 ,4, 51, 5, 4};
+    int (*f)(int *, int);
+    int array[20] = {1, 2, 1, 2, 14, 5, 4, 5, 452, 54, 1, 54, 21, 4, 51, 5, 4};
     char op;
 
     printf("enter operation(^/_/+/*): ");
@@ -53,27 +53,22 @@ int main() {
     }
 
     switch (op) {
-        case '^': {
-            f = max;
-        }
-        break;
-        case '_': {
-            f = min;
-        }
-        break;
-        case '+': {
-            f = sum;
-        }
-        break;
-        case '*': {
-            f = mult;
-        }
-        break;
-        default: {
-            fprintf(stderr, "error while reading operation type\nunsupported operation '%c'\nexit\n", op);
-            exit(EXIT_FAILURE);
-        }
-        break;
+    case '^': {
+        f = max;
+    } break;
+    case '_': {
+        f = min;
+    } break;
+    case '+': {
+        f = sum;
+    } break;
+    case '*': {
+        f = mult;
+    } break;
+    default: {
+        fprintf(stderr, "error while reading operation type\nunsupported operation '%c'\nexit\n", op);
+        exit(EXIT_FAILURE);
+    } break;
     }
 
     printf("result = %d\n", f(array, 20));

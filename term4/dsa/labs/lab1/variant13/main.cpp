@@ -1,97 +1,74 @@
-#include <stdexcept>
 #include <iostream>
+#include <stdexcept>
 
-struct ListObject
-{
+struct ListObject {
     std::string name;
     std::size_t code;
 };
 
-std::ostream &operator<<(std::ostream &os, const struct ListObject &obj)
-{
+std::ostream &operator<<(std::ostream &os, const struct ListObject &obj) {
     os << "ListObject{name: '" << obj.name << "', code: " << obj.code << "}";
     return os;
 }
 
-class LinkedList
-{
-  private:
-    struct Node
-    {
+class LinkedList {
+private:
+    struct Node {
         ListObject value;
         Node *next;
         Node *previous;
 
-        Node(ListObject value)
-        {
+        Node(ListObject value) {
             next = nullptr;
             previous = nullptr;
-            this->value = value;
+            value = value;
         }
     };
 
     LinkedList::Node *first, *last;
 
-  public:
+public:
     LinkedList() : first{nullptr}, last{nullptr} {}
 
-    void add(ListObject value)
-    {
+    void add(ListObject value) {
         LinkedList::Node *n = new LinkedList::Node(value);
-        if (first == nullptr)
-        {
+        if (first == nullptr) {
             first = n;
             last = first;
-        }
-        else
-        {
+        } else {
             LinkedList::Node *current;
-            for (current = first; current; current = current->next)
-            {
-                if (current->value.name == n->value.name)
-                {
+            for (current = first; current; current = current->next) {
+                if (current->value.name == n->value.name) {
                     return;
                 }
             }
 
-            for (current = first; current; current = current->next)
-            {
-                if (current->value.code > n->value.code)
-                {
-                    if (current->previous)
-                    {
-                        if (current->previous->value.code < n->value.code)
-                        {
+            for (current = first; current; current = current->next) {
+                if (current->value.code > n->value.code) {
+                    if (current->previous) {
+                        if (current->previous->value.code < n->value.code) {
                             current->previous->next = n;
                             n->previous = current->previous;
                             current->previous = n;
                             n->next = current;
                             return;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         first = n;
                         n->next = current;
                         current->previous = n;
                         return;
                     }
-                }
-                else if (current->value.code < n->value.code)
-                {
-                    if (current->next)
-                    {
-                        if (current->next->value.code > n->value.code)
-                        {
+                } else if (current->value.code < n->value.code) {
+                    if (current->next) {
+                        if (current->next->value.code > n->value.code) {
                             current->next->previous = n;
                             n->next = current->next;
                             current->next = n;
                             n->previous = current;
                             return;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         last = n;
                         current->next = n;
                         n->previous = current;
@@ -102,22 +79,18 @@ class LinkedList
         }
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const LinkedList &list)
-    {
+    friend std::ostream &operator<<(std::ostream &os, const LinkedList &list) {
         os << "LinkedList{";
-        for (LinkedList::Node *n = list.first; n; n = n->next)
-        {
+        for (LinkedList::Node *n = list.first; n; n = n->next) {
             os << n->value << (n->next ? ", " : "}");
         }
         return os;
     }
 };
 
-int main()
-{
+int main() {
     LinkedList list{};
-    for (int i = 0; i < 5; i++)
-    {
+    for (int i = 0; i < 5; i++) {
         ListObject obj = ListObject{};
         obj.code = 5 - i;
         obj.name = "object #" + std::to_string(obj.code);

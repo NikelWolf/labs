@@ -1,17 +1,17 @@
 #define _GNU_SOURCE
 
-#include <stdio.h>
+#include <arpa/inet.h>
 #include <ctype.h>
+#include <fcntl.h>
+#include <netdb.h>
+#include <signal.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <netdb.h>
-#include <arpa/inet.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#include <signal.h>
+#include <sys/types.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 #include "configs_parser.h"
 #include "logger.h"
@@ -21,9 +21,8 @@
 extern int err;
 extern server_configs *sc;
 
-
 void exit_handler() {
-    if(sc)
+    if (sc)
         free_server_configs(sc);
 
     close_logger();
@@ -39,7 +38,8 @@ void sigterm_handler(int signal) {
 void sigchld_handler(int signal) {
     signal++;
 
-    while(waitpid(-1, NULL, WNOHANG) > 0);
+    while (waitpid(-1, NULL, WNOHANG) > 0)
+        ;
 }
 
 void set_signal_handler(int signal, void (*handler)(int)) {
@@ -139,12 +139,12 @@ int response_for_http_request(int sfd, const char *http_head, size_t http_head_l
 char *get_client_ip(struct sockaddr *client_addr) {
     char *ip_str;
     if (client_addr->sa_family == AF_INET) {
-        struct sockaddr_in *client_addr_in = (struct sockaddr_in *) client_addr;
-        ip_str = (char *) calloc(INET_ADDRSTRLEN, sizeof(char));
+        struct sockaddr_in *client_addr_in = (struct sockaddr_in *)client_addr;
+        ip_str = (char *)calloc(INET_ADDRSTRLEN, sizeof(char));
         inet_ntop(AF_INET, client_addr_in, ip_str, INET_ADDRSTRLEN);
     } else {
-        struct sockaddr_in6 *client_addr_in6 = (struct sockaddr_in6 *) client_addr;
-        ip_str = (char *) calloc(INET6_ADDRSTRLEN, sizeof(char));
+        struct sockaddr_in6 *client_addr_in6 = (struct sockaddr_in6 *)client_addr;
+        ip_str = (char *)calloc(INET6_ADDRSTRLEN, sizeof(char));
         inet_ntop(AF_INET6, client_addr_in6, ip_str, INET6_ADDRSTRLEN);
     }
 
@@ -152,7 +152,7 @@ char *get_client_ip(struct sockaddr *client_addr) {
 }
 
 int handle_request(int client_fd, struct sockaddr_storage *client_addr, server_configs *sc) {
-    char *client_ip = get_client_ip((struct sockaddr *) client_addr);
+    char *client_ip = get_client_ip((struct sockaddr *)client_addr);
     log_client_connection(client_ip);
 
     char *request = "";
@@ -171,7 +171,7 @@ int handle_request(int client_fd, struct sockaddr_storage *client_addr, server_c
     }
 
     char **request_head = string_split(request, "\r\n", 1);
-    if(string_array_length((const char **) request_head) >= 1) {
+    if (string_array_length((const char **)request_head) >= 1) {
         log_request(client_ip, request_head[0]);
     } else {
         log_request(client_ip, "[]");
@@ -274,7 +274,6 @@ int init_server(int *server_fd, server_configs *sc) {
             return 0;
         }
 
-
         if (bind(*server_fd, p->ai_addr, p->ai_addrlen) == -1) {
             err = errno;
             log_error("bind: %s", strerror(err));
@@ -290,7 +289,6 @@ int init_server(int *server_fd, server_configs *sc) {
         log_error("failed to bind server");
         return 0;
     }
-
 
     if (listen(*server_fd, parse_ushort(sc->backlog)) == -1) {
         err = errno;
@@ -317,7 +315,7 @@ void start_server(server_configs *sc) {
     while (1) {
         struct sockaddr_storage client_addr;
         socklen_t client_addr_size = sizeof(struct sockaddr_storage);
-        int client_fd = accept(server_fd, (struct sockaddr *) &client_addr, &client_addr_size);
+        int client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_size);
 
         if (client_fd == -1) {
             err = errno;

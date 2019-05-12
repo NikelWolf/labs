@@ -20,27 +20,22 @@ int main() {
     b.im = b_s == '-' ? -b.im : b.im;
 
     switch (op) {
-        case '+': {
-            c = complex_add(a, b);
-        }
-        break;
-        case '-': {
-            c = complex_substract(a, b);
-        }
-        break;
-        case '*': {
-            c = complex_multiply(a, b);
-        }
-        break;
-        case '\\': {
-            c = complex_division(a, b);
-        }
-        break;
-        default: {
-            fprintf(stderr, "error in operation type\nunsupported operation '%c'\nexit\n", op);
-            exit(EXIT_FAILURE);
-        }
-        break;
+    case '+': {
+        c = complex_add(a, b);
+    } break;
+    case '-': {
+        c = complex_substract(a, b);
+    } break;
+    case '*': {
+        c = complex_multiply(a, b);
+    } break;
+    case '\\': {
+        c = complex_division(a, b);
+    } break;
+    default: {
+        fprintf(stderr, "error in operation type\nunsupported operation '%c'\nexit\n", op);
+        exit(EXIT_FAILURE);
+    } break;
     }
 
     printf("(%lg %c i%lg) %c (%lg %c i%lg) = (%lg %c i%lg)\n", a.re, a_s, a.im < 0 ? -a.im : a.im, op, b.re, b_s, b.im < 0 ? -b.im : b.im, c.re, c.im < 0 ? '-' : '+', c.im < 0 ? -c.im : c.im);

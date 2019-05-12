@@ -9,7 +9,7 @@ static void init_node(node *n, int value) {
 }
 
 node *create_node(int value) {
-    node *n = (node *) malloc(sizeof(node));
+    node *n = (node *)malloc(sizeof(node));
 
     init_node(n, value);
 
@@ -29,10 +29,10 @@ tree *create_tree(int value) {
 }
 
 void free_node(node *n) {
-    if(n) {
-        if(n->left)
+    if (n) {
+        if (n->left)
             free_node(n->left);
-        if(n->right)
+        if (n->right)
             free_node(n->right);
 
         free(n);
@@ -48,16 +48,16 @@ void free_tree(tree *t) {
 }
 
 static unsigned int count_leaves(tree *t) {
-    if(t == NULL)
+    if (t == NULL)
         return 0;
 
     unsigned int leaves = 0;
-    if(t->left) 
+    if (t->left)
         leaves += count_leaves(t->left);
     else
         leaves++;
-    
-    if(t->right)
+
+    if (t->right)
         leaves += count_leaves(t->right);
     else
         leaves++;
@@ -66,37 +66,37 @@ static unsigned int count_leaves(tree *t) {
 }
 
 unsigned int get_leaves(tree *t) {
-    if(t == NULL)
+    if (t == NULL)
         return 0;
 
     return count_leaves(t);
 }
 
 static unsigned int count_inner_nodes(tree *t) {
-    if(t == NULL)
+    if (t == NULL)
         return 0;
 
     unsigned int nodes = 1;
-    if(t->left)
-        nodes += count_inner_nodes(t->left); 
+    if (t->left)
+        nodes += count_inner_nodes(t->left);
 
-    if(t->right)
+    if (t->right)
         nodes += count_inner_nodes(t->right);
 
     return nodes;
 }
 
 unsigned int get_inner_nodes(tree *t) {
-    if(t == NULL)
+    if (t == NULL)
         return 0;
 
     return count_inner_nodes(t);
 }
 
 unsigned int get_nodes(tree *t) {
-    if(t == NULL)
+    if (t == NULL)
         return 0;
-        
+
     return count_inner_nodes(t) + count_leaves(t);
 }
 
@@ -105,131 +105,123 @@ void set_node_value(node *n, int value) {
 }
 
 void remove_node(node *n, direction d) {
-    if(n == NULL)
+    if (n == NULL)
         return;
 
-    switch(d) {
-        case left: {
-            free_node(n->left);
+    switch (d) {
+    case left: {
+        free_node(n->left);
 
-            n->left = NULL;
-        }
-        break;
-        case right: {
-            free_node(n->right);
+        n->left = NULL;
+    } break;
+    case right: {
+        free_node(n->right);
 
-            n->right = NULL;
-        }
-        break;
-        default: {
-            return;
-        }
-        break;
+        n->right = NULL;
+    } break;
+    default: {
+        return;
+    } break;
     }
 }
 
 node *add_node(node *n, direction d, int value) {
-    if(n == NULL) {
+    if (n == NULL) {
         return NULL;
     }
 
     node *chld = create_node(value);
 
-    switch(d) {
-        case left: {
-            if(n->left) 
-                free_node(n->left);
+    switch (d) {
+    case left: {
+        if (n->left)
+            free_node(n->left);
 
-            n->left = chld;
-            chld->parent = n;
-        }
-        break;
-        case right: {
-            if(n->right)
-                free_node(n->right);
+        n->left = chld;
+        chld->parent = n;
+    } break;
+    case right: {
+        if (n->right)
+            free_node(n->right);
 
-            n->right = chld;
-            chld->parent = n;            
-        }
-        break;
-        default: {
-            return NULL;
-        }
-        break;
+        n->right = chld;
+        chld->parent = n;
+    } break;
+    default: {
+        return NULL;
+    } break;
     }
 
     return chld;
 }
 
 node *change_node(node *n, direction d) {
-    if(n == NULL)
+    if (n == NULL)
         return NULL;
 
-    switch(d) {
-        case left: {
-            if(n->left)
-                return n->left;
+    switch (d) {
+    case left: {
+        if (n->left)
+            return n->left;
 
-            return n;
-        }
-        break;
-        case right: {
-            if(n->right)
-                return n->right;
+        return n;
+    } break;
+    case right: {
+        if (n->right)
+            return n->right;
 
-            return n;
-        }
-        break;
-        case backward: {
-            if(n->parent) 
-                return n->parent;
+        return n;
+    } break;
+    case backward: {
+        if (n->parent)
+            return n->parent;
 
-            return n;
-        }
-        break;
-        default: {
-            return n;
-        }
-        break;
+        return n;
+    } break;
+    default: {
+        return n;
+    } break;
     }
 }
 
 root *go_to_root(node *n) {
-    if(n == NULL)
+    if (n == NULL)
         return NULL;
 
-    if(n->is_root)
+    if (n->is_root)
         return n;
-    
+
     return go_to_root(n->parent);
 }
 
 static void serialize_node(node *n, FILE *file) {
-    if(n == NULL) 
+    if (n == NULL)
         return;
 
     fprintf(file, " ( %d%c%c", n->element, n->left ? '+' : '-', n->right ? '+' : '-');
-    
-    if(n->left)
+
+    if (n->left)
         serialize_node(n->left, file);
     else
         fprintf(file, " ()");
-    
-    if(n->right)
+
+    if (n->right)
         serialize_node(n->right, file);
     else
         fprintf(file, " ()");
-    
+
     fprintf(file, " )");
 }
 
 void serialize_tree(tree *t, const char *filepath) {
-    if(t == NULL || t->is_root == 0)
+    if (t == NULL || t->is_root == 0)
         return;
 
     FILE *file = fopen(filepath, "w");
-    if(file == NULL) {
-        fprintf(stderr, "\x1b[31m" "error: serialize\n" "\x1b[37m");
+    if (file == NULL) {
+        fprintf(stderr, "\x1b[31m"
+                        "error: serialize\n"
+                        "\x1b[37m");
         return;
     }
 
@@ -246,13 +238,13 @@ static node *deserialize_node(node *n, FILE *file) {
     node *chld;
     fscanf(file, " ( %d%c%c", &number, &left_char, &right_char);
     chld = create_node(number);
-    
-    if(left_char == '+') 
+
+    if (left_char == '+')
         chld->left = deserialize_node(chld, file);
     else
         fscanf(file, " ()");
 
-    if(right_char == '+')
+    if (right_char == '+')
         chld->right = deserialize_node(chld, file);
     else
         fscanf(file, " ()");
@@ -266,8 +258,10 @@ static node *deserialize_node(node *n, FILE *file) {
 
 tree *deserialize_tree(const char *filepath) {
     FILE *file = fopen(filepath, "r");
-    if(file == NULL) {
-        fprintf(stderr, "\x1b[31m" "error: deserialize\n" "\x1b[37m");
+    if (file == NULL) {
+        fprintf(stderr, "\x1b[31m"
+                        "error: deserialize\n"
+                        "\x1b[37m");
         return NULL;
     }
 
@@ -286,50 +280,48 @@ tree *clear_tree(tree *t) {
 }
 
 static int is_node_part_of_heap(node *n) {
-    if(n == NULL) 
+    if (n == NULL)
         return 1;
 
-    if(n->left == NULL && n->right == NULL)
+    if (n->left == NULL && n->right == NULL)
         return 1;
 
-    if(n->left == NULL && n->right != NULL)
+    if (n->left == NULL && n->right != NULL)
         return 0;
 
-    if(n->left != NULL && n->left->element > n->element)
+    if (n->left != NULL && n->left->element > n->element)
         return 0;
-    
-    if(n->right != NULL && n->right->element > n->element)
+
+    if (n->right != NULL && n->right->element > n->element)
         return 0;
 
     return is_node_part_of_heap(n->left) && is_node_part_of_heap(n->right);
 }
 
 int is_tree_heap(tree *t) {
-    if(t == NULL) 
+    if (t == NULL)
         return 0;
 
     return is_node_part_of_heap(t);
 }
-
 
 void print_node_statistic(node *n) {
     printf("[ %14p => %11d | %4d | %14p | %14p | %14p ]\n", n, n->element, n->is_root, n->parent, n->left, n->right);
 }
 
 void print_node_statistic_header() {
-            printf("[     %s    =>     %s   | %s |      %s    |      %s      |      %s     ]\n", "current", "value", "root", "parent", "left", "right");
+    printf("[     %s    =>     %s   | %s |      %s    |      %s      |      %s     ]\n", "current", "value", "root", "parent", "left", "right");
 }
 
 void print_tree_statistic(tree *t) {
-    if(t) {
-        if(t->is_root == 1) {
+    if (t) {
+        if (t->is_root == 1) {
             print_node_statistic_header();
             printf("\n");
         }
-        
+
         print_node_statistic(t);
-    }
-    else
+    } else
         return;
 
     print_tree_statistic(t->left);

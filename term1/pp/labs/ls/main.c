@@ -1,14 +1,14 @@
 #define _GNU_SOURCE
 
-#include <unistd.h>
+#include <dirent.h>
+#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <dirent.h>
-#include <sys/types.h>
 #include <string.h>
-#include <pwd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <time.h>
+#include <unistd.h>
 
 #define GREEN "\x1b[32m"
 #define BLUE "\x1b[34m"
@@ -17,7 +17,7 @@
 
 int check_path(const char *path) {
     struct stat st;
-    if(stat(path, &st) == -1) 
+    if (stat(path, &st) == -1)
         return 0;
 
     return 1;
@@ -75,10 +75,10 @@ unsigned long get_links_count(struct stat st) {
 int fill_user_name(char **name, struct stat st) {
     struct passwd *pswd = getpwuid(st.st_uid);
 
-    if(pswd == NULL)
+    if (pswd == NULL)
         return 0;
 
-    *name = (char *) calloc(strlen(pswd->pw_name)+1, sizeof(char));
+    *name = (char *)calloc(strlen(pswd->pw_name) + 1, sizeof(char));
     strcpy(*name, pswd->pw_name);
 
     return 1;
@@ -87,7 +87,7 @@ int fill_user_name(char **name, struct stat st) {
 char *get_modify_time(struct stat st) {
     struct timespec ts = st.st_mtim;
     char *mt = strdup(ctime(&ts.tv_sec));
-    mt[strlen(mt)-9]= 0;
+    mt[strlen(mt) - 9] = 0;
     return mt;
 }
 
@@ -101,11 +101,11 @@ void print_info(struct stat st) {
     printf("%2ld ", get_links_count(st));
     printf("%s ", name);
     printf("%ld ", st.st_size);
-    printf("%s ", t+4);
+    printf("%s ", t + 4);
 }
 
 void ls(const char *path, int file_suffix, int hidden, int info) {
-    if(!check_path(path)) {
+    if (!check_path(path)) {
         printf(RED "ls: cannot access '%s': No such file or directory\n" WHITE, path);
         return;
     }
@@ -114,9 +114,9 @@ void ls(const char *path, int file_suffix, int hidden, int info) {
 
     fill_cur_file_stat(path, &cur_file_stat);
 
-    if(!is_dir(cur_file_stat)) {
+    if (!is_dir(cur_file_stat)) {
 
-        if(info) {
+        if (info) {
             print_info(cur_file_stat);
         }
         printf(GREEN "%s%s\n" WHITE, path, file_suffix ? is_exec(cur_file_stat) ? "*" : is_fifo(cur_file_stat) ? "|" : "" : "");
@@ -127,33 +127,32 @@ void ls(const char *path, int file_suffix, int hidden, int info) {
 
     struct dirent *entry;
 
-    for(entry = readdir(dir); entry != NULL; entry = readdir(dir)) {
+    for (entry = readdir(dir); entry != NULL; entry = readdir(dir)) {
         fill_cur_file_stat(entry->d_name, &cur_file_stat);
-        if(!hidden) {
-            if(!strcmp(entry->d_name, "."))
+        if (!hidden) {
+            if (!strcmp(entry->d_name, "."))
                 continue;
-            else if(!strcmp(entry->d_name, ".."))
+            else if (!strcmp(entry->d_name, ".."))
                 continue;
         }
 
-        if(is_dir_by_path(entry->d_name)) {
-            if(info) {
+        if (is_dir_by_path(entry->d_name)) {
+            if (info) {
                 print_info(cur_file_stat);
                 printf(GREEN "%s%s    " WHITE, entry->d_name, file_suffix ? "/" : "");
                 printf("\n");
                 continue;
             }
             printf(GREEN "%s%s    " WHITE, entry->d_name, file_suffix ? "/" : "");
-            
-        }
-        else {
-            if(info) {
+
+        } else {
+            if (info) {
                 print_info(cur_file_stat);
                 printf(BLUE "%s%s    " WHITE, entry->d_name, file_suffix ? is_exec(cur_file_stat) ? "*" : is_fifo(cur_file_stat) ? "|" : "" : "");
                 printf("\n");
                 continue;
             }
-            printf(BLUE "%s%s    " WHITE, entry->d_name, file_suffix ? is_exec(cur_file_stat) ? "*" : is_fifo(cur_file_stat) ? "|" : "" : "");            
+            printf(BLUE "%s%s    " WHITE, entry->d_name, file_suffix ? is_exec(cur_file_stat) ? "*" : is_fifo(cur_file_stat) ? "|" : "" : "");
         }
     }
 
@@ -161,11 +160,11 @@ void ls(const char *path, int file_suffix, int hidden, int info) {
 }
 
 int main(int argc, char *argv[]) {
-    if(argc == 1) {
+    if (argc == 1) {
         char *cur_dir = get_current_dir_name();
         ls(cur_dir, 0, 0, 0);
         free(cur_dir);
-        printf("\n");        
+        printf("\n");
         return 0;
     } else {
         int i;
@@ -173,21 +172,21 @@ int main(int argc, char *argv[]) {
         int hidden = 0;
         int show_info = 0;
         int has_files = 0;
-        for(i = 1; i < argc; i++) {
-            if(argv[i][0] == '-') {
+        for (i = 1; i < argc; i++) {
+            if (argv[i][0] == '-') {
                 int j;
-                for(j = 1; j < (int) strlen(argv[i]); j++) {
-                    switch(argv[i][j]) {
-                        case 'l':
-                            show_info = 1;
-                        break;                        
-                        case 'a':
-                            hidden = 1;
-                        break;                        
-                        case 'F':
-                            file_suffix = 1;
-                        break;                        
-                        default:
+                for (j = 1; j < (int)strlen(argv[i]); j++) {
+                    switch (argv[i][j]) {
+                    case 'l':
+                        show_info = 1;
+                        break;
+                    case 'a':
+                        hidden = 1;
+                        break;
+                    case 'F':
+                        file_suffix = 1;
+                        break;
+                    default:
                         break;
                     }
                 }
@@ -196,19 +195,18 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        if(!has_files) {    
+        if (!has_files) {
             char *cur_dir = get_current_dir_name();
             ls(cur_dir, file_suffix, hidden, show_info);
             free(cur_dir);
             printf("\n");
-            return 0;    
+            return 0;
         } else {
-            for(i = 1; i < argc; i++) {
-                if(argv[i][0] != '-')
+            for (i = 1; i < argc; i++) {
+                if (argv[i][0] != '-')
                     ls(argv[i], file_suffix, hidden, show_info);
             }
         }
-
     }
 
     printf("\n");

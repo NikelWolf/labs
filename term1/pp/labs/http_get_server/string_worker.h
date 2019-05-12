@@ -1,12 +1,12 @@
 #ifndef STRING_WORKER_H
 #define STRING_WORKER_H
 
-#include <stdio.h>
 #include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-char *string_concatate(const char *string1,const char *string2);
+char *string_concatate(const char *string1, const char *string2);
 int string_equal(const char *string1, const char *string2);
 int string_is_empty(const char *string);
 char **string_split(const char *line, const char *separators, int max_split);

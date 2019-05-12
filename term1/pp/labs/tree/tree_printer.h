@@ -1,7 +1,7 @@
 #ifndef TREE_PRINTER_H
 #define TREE_PRINTER_H
 
-#define INFINITY (1<<20)
+#define INFINITY (1 << 20)
 #define MAX_HEIGHT 1000
 
 ;
@@ -9,11 +9,11 @@
 typedef struct asciinode_struct {
     struct asciinode_struct *left;
     struct asciinode_struct *right;
-    int edge_length; 
-    int height;      
+    int edge_length;
+    int height;
     int lablen;
-    int parent_dir;   
-    char label[11];  
+    int parent_dir;
+    char label[11];
 } asciinode;
 
 #include "bintree.h"

@@ -2,10 +2,12 @@
 #define BINTREE_H
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
-typedef enum direction_e {left, right, backward} direction;
+typedef enum direction_e { left,
+                           right,
+                           backward } direction;
 
 typedef struct node_s {
     int element;

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-typedef void (*function_type)(int*, int);
+typedef void (*function_type)(int *, int);
 
 int sum(int *array, int size) {
     int sum = 0;
@@ -20,7 +20,7 @@ void swap(int *a, int *b) {
 }
 
 int cmp_m(const void *a, const void *b) {
-    return (*((int *) a) - *((int *) b));
+    return (*((int *)a) - *((int *)b));
 }
 
 int cmp_l(const void *a, const void *b) {
@@ -37,7 +37,7 @@ void sort_l(int *array, int size) {
 
 void reverse(int *array, int size) {
     int i;
-    for (i = 0; i < size/2; i++) {
+    for (i = 0; i < size / 2; i++) {
         swap(&array[i], &array[size - 1 - i]);
     }
 }
@@ -57,17 +57,17 @@ function_type generator(int *array, int size) {
 int main() {
     srand(time(NULL));
 
-    int size = 15 + rand()%21;
-    int *array = malloc(sizeof(int)*size);
+    int size = 15 + rand() % 21;
+    int *array = malloc(sizeof(int) * size);
 
     int i;
     for (i = 0; i < size; i++) {
-        array[i] = rand()%50 - 25;
+        array[i] = rand() % 50 - 25;
     }
 
     printf("array = [");
     for (i = 0; i < size; i++) {
-        printf("%d%s", array[i], i == size-1 ? "]\n" : ", ");
+        printf("%d%s", array[i], i == size - 1 ? "]\n" : ", ");
     }
 
     function_type f = generator(array, size);
@@ -75,7 +75,7 @@ int main() {
 
     printf("array = [");
     for (i = 0; i < size; i++) {
-        printf("%d%s", array[i], i == size-1 ? "]\n" : ", ");
+        printf("%d%s", array[i], i == size - 1 ? "]\n" : ", ");
     }
 
     return 0;

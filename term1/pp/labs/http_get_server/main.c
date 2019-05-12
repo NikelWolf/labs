@@ -1,18 +1,18 @@
 #define _GNU_SOURCE
 
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <signal.h>
 
+#include "configs_parser.h"
 #include "logger.h"
 #include "server_utils.h"
-#include "configs_parser.h"
 
 int err;
 server_configs *sc = NULL;
 
-int main(int argc, char  *argv[]) {
+int main(int argc, char *argv[]) {
     if (argc != 2) {
         fprintf(stderr, "usage: http_get_server configuration.ini\n");
         exit(EXIT_FAILURE);
@@ -31,7 +31,7 @@ int main(int argc, char  *argv[]) {
     if (pid == -1) {
         err = errno;
         log_error("fork: %s", strerror(err));
-    } else if(pid == 0) {
+    } else if (pid == 0) {
         start_server(sc);
     } else {
         printf("server starded with pid %d on port %s and root %s\n", pid, sc->port, sc->server_root);

@@ -7,9 +7,15 @@ typedef struct struct_date {
     int year;
 } date;
 
-typedef enum day_name_e {sunday, monday, tuesday, wednesday, thursday, friday, saturday} day_name;
+typedef enum day_name_e { sunday,
+                          monday,
+                          tuesday,
+                          wednesday,
+                          thursday,
+                          friday,
+                          saturday } day_name;
 
-int what_day(const struct struct_date* date) {
+int what_day(const struct struct_date *date) {
     int a = (14 - date->month) / 12;
     int y = date->year - a;
     int m = date->month + 12 * a - 2;
@@ -18,15 +24,15 @@ int what_day(const struct struct_date* date) {
 }
 
 void check_date(date d) {
-    if(d.day <= 0 || d.day > 31) {
+    if (d.day <= 0 || d.day > 31) {
         printf("wrong day number: %d\n", d.day);
 
         exit(EXIT_FAILURE);
-    } else if(d.month <= 0 || d.month > 12) {
+    } else if (d.month <= 0 || d.month > 12) {
         printf("wrong month number: %d\n", d.month);
 
         exit(EXIT_FAILURE);
-    } else if(d.year < 1583) {
+    } else if (d.year < 1583) {
         printf("unsupported year number: %d\n", d.year);
 
         exit(EXIT_FAILURE);
@@ -34,23 +40,23 @@ void check_date(date d) {
 
     int leap_year = d.year % 4 == 0 ? (d.year % 100 == 0 ? (d.year % 400 == 0 ? 1 : 0) : 1) : 0;
 
-    if(d.month == 2) {
-        if(leap_year && d.day > 29) {
+    if (d.month == 2) {
+        if (leap_year && d.day > 29) {
             printf("wrong day number in leap year(%d) in month(%d): %d\n", d.year, d.month, d.day);
 
             exit(EXIT_FAILURE);
-        } else if(!leap_year && d.day > 28){
+        } else if (!leap_year && d.day > 28) {
             printf("wrong day number in not leap year(%d) in month(%d): %d\n", d.year, d.month, d.day);
 
             exit(EXIT_FAILURE);
         }
     } else {
         int magic_month = d.month < 8 ? d.month : d.month - 8 + 1;
-        if(magic_month % 2 == 1 && d.day > 31) {
+        if (magic_month % 2 == 1 && d.day > 31) {
             printf("wrong day number: %d\n", d.day);
 
             exit(EXIT_FAILURE);
-        } else if(magic_month % 2 == 0 && d.day > 30) {
+        } else if (magic_month % 2 == 0 && d.day > 30) {
             printf("wrong day number: %d\n", d.day);
 
             exit(EXIT_FAILURE);
@@ -59,14 +65,21 @@ void check_date(date d) {
 }
 
 const char *get_day_string(day_name day) {
-    switch(day) {
-        case 0: return "sunday";
-        case 1: return "monday";
-        case 2: return "tuesday";
-        case 3: return "wednesday";
-        case 4: return "thursday";
-        case 5: return "friday";
-        case 6: return "saturday";
+    switch (day) {
+    case 0:
+        return "sunday";
+    case 1:
+        return "monday";
+    case 2:
+        return "tuesday";
+    case 3:
+        return "wednesday";
+    case 4:
+        return "thursday";
+    case 5:
+        return "friday";
+    case 6:
+        return "saturday";
     }
 
     return "";
@@ -81,7 +94,7 @@ int main() {
     size_t size = 0;
     getline(&line, &size, stdin);
 
-    if(sscanf(line, "%d.%d.%d", &d.day, &d.month, &d.year) != 3) {
+    if (sscanf(line, "%d.%d.%d", &d.day, &d.month, &d.year) != 3) {
         printf("can not parse date correctly\n");
 
         return 1;

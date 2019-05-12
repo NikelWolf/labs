@@ -1,8 +1,8 @@
 #ifndef SERVER_UTILS_H
 #define SERVER_UTILS_H
 
-#include <sys/socket.h>
 #include <netdb.h>
+#include <sys/socket.h>
 
 #include "configs_parser.h"
 

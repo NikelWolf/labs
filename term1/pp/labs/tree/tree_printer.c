@@ -3,25 +3,25 @@
 static int lprofile[MAX_HEIGHT];
 static int rprofile[MAX_HEIGHT];
 
-static int gap = 3;  
+static int gap = 3;
 
-static int print_next;    
+static int print_next;
 
-int MIN (int X, int Y) {
+int MIN(int X, int Y) {
     return ((X) < (Y)) ? (X) : (Y);
 }
 
-int MAX (int X, int Y) {
+int MAX(int X, int Y) {
     return ((X) > (Y)) ? (X) : (Y);
 }
 
 asciinode *build_ascii_tree_recursive(tree *t) {
-    if (t == NULL) 
+    if (t == NULL)
         return NULL;
 
     asciinode *node;
 
-    node = (asciinode *) malloc(sizeof(asciinode));
+    node = (asciinode *)malloc(sizeof(asciinode));
     node->left = build_ascii_tree_recursive(t->left);
     node->right = build_ascii_tree_recursive(t->right);
 
@@ -37,11 +37,10 @@ asciinode *build_ascii_tree_recursive(tree *t) {
     return node;
 }
 
-
 asciinode *build_ascii_tree(tree *t) {
-    if (t == NULL) 
+    if (t == NULL)
         return NULL;
-    
+
     asciinode *node = build_ascii_tree_recursive(t);
     node->parent_dir = 0;
 
@@ -49,7 +48,7 @@ asciinode *build_ascii_tree(tree *t) {
 }
 
 void free_ascii_tree(asciinode *node) {
-    if (node == NULL) 
+    if (node == NULL)
         return;
 
     free_ascii_tree(node->left);
@@ -58,45 +57,45 @@ void free_ascii_tree(asciinode *node) {
 }
 
 void compute_lprofile(asciinode *node, int x, int y) {
-    if (node == NULL) 
+    if (node == NULL)
         return;
-    
+
     int i, isleft;
     isleft = (node->parent_dir == -1);
-    lprofile[y] = MIN(lprofile[y], x-((node->lablen-isleft)/2));
+    lprofile[y] = MIN(lprofile[y], x - ((node->lablen - isleft) / 2));
 
     if (node->left != NULL) {
-        for (i=1; i <= node->edge_length && y+i < MAX_HEIGHT; i++) {
-            lprofile[y+i] = MIN(lprofile[y+i], x-i);
+        for (i = 1; i <= node->edge_length && y + i < MAX_HEIGHT; i++) {
+            lprofile[y + i] = MIN(lprofile[y + i], x - i);
         }
     }
 
-    compute_lprofile(node->left, x-node->edge_length-1, y+node->edge_length+1);
-    compute_lprofile(node->right, x+node->edge_length+1, y+node->edge_length+1);
+    compute_lprofile(node->left, x - node->edge_length - 1, y + node->edge_length + 1);
+    compute_lprofile(node->right, x + node->edge_length + 1, y + node->edge_length + 1);
 }
 
 void compute_rprofile(asciinode *node, int x, int y) {
-    if (node == NULL) 
+    if (node == NULL)
         return;
 
     int i, notleft;
     notleft = (node->parent_dir != -1);
-    rprofile[y] = MAX(rprofile[y], x+((node->lablen-notleft)/2));
+    rprofile[y] = MAX(rprofile[y], x + ((node->lablen - notleft) / 2));
 
     if (node->right != NULL) {
-        for (i=1; i <= node->edge_length && y+i < MAX_HEIGHT; i++) {
-            rprofile[y+i] = MAX(rprofile[y+i], x+i);
+        for (i = 1; i <= node->edge_length && y + i < MAX_HEIGHT; i++) {
+            rprofile[y + i] = MAX(rprofile[y + i], x + i);
         }
     }
 
-    compute_rprofile(node->left, x-node->edge_length-1, y+node->edge_length+1);
-    compute_rprofile(node->right, x+node->edge_length+1, y+node->edge_length+1);
+    compute_rprofile(node->left, x - node->edge_length - 1, y + node->edge_length + 1);
+    compute_rprofile(node->right, x + node->edge_length + 1, y + node->edge_length + 1);
 }
 
 void compute_edge_lengths(asciinode *node) {
-    if (node == NULL) 
+    if (node == NULL)
         return;
-    
+
     int h, hmin, i, delta;
     compute_edge_lengths(node->left);
     compute_edge_lengths(node->right);
@@ -105,18 +104,18 @@ void compute_edge_lengths(asciinode *node) {
         node->edge_length = 0;
     } else {
         if (node->left != NULL) {
-            for (i=0; i<node->left->height && i < MAX_HEIGHT; i++) {
+            for (i = 0; i < node->left->height && i < MAX_HEIGHT; i++) {
                 rprofile[i] = -INFINITY;
             }
 
             compute_rprofile(node->left, 0, 0);
             hmin = node->left->height;
-        }  else {
+        } else {
             hmin = 0;
         }
 
         if (node->right != NULL) {
-            for (i=0; i<node->right->height && i < MAX_HEIGHT; i++) {
+            for (i = 0; i < node->right->height && i < MAX_HEIGHT; i++) {
                 lprofile[i] = INFINITY;
             }
 
@@ -127,15 +126,15 @@ void compute_edge_lengths(asciinode *node) {
         }
 
         delta = 4;
-        for (i=0; i<hmin; i++) {
+        for (i = 0; i < hmin; i++) {
             delta = MAX(delta, gap + 1 + rprofile[i] - lprofile[i]);
         }
 
-        if (((node->left != NULL && node->left->height == 1) || (node->right != NULL && node->right->height == 1))&&delta>4) {
+        if (((node->left != NULL && node->left->height == 1) || (node->right != NULL && node->right->height == 1)) && delta > 4) {
             delta--;
         }
 
-        node->edge_length = ((delta+1)/2) - 1;
+        node->edge_length = ((delta + 1) / 2) - 1;
     }
 
     h = 1;
@@ -149,24 +148,23 @@ void compute_edge_lengths(asciinode *node) {
 }
 
 void print_level(asciinode *node, int x, int level) {
-    if (node == NULL) 
+    if (node == NULL)
         return;
-    
+
     int i, isleft;
     isleft = (node->parent_dir == -1);
 
     if (level == 0) {
-        for (i=0; i<(x-print_next-((node->lablen-isleft)/2)); i++) {
+        for (i = 0; i < (x - print_next - ((node->lablen - isleft) / 2)); i++) {
             printf(" ");
         }
 
         print_next += i;
         printf("%s", node->label);
         print_next += node->lablen;
-    } 
-    else if (node->edge_length >= level) {
+    } else if (node->edge_length >= level) {
         if (node->left != NULL) {
-            for (i=0; i<(x-print_next-(level)); i++)  {
+            for (i = 0; i < (x - print_next - (level)); i++) {
                 printf(" ");
             }
 
@@ -175,7 +173,7 @@ void print_level(asciinode *node, int x, int level) {
             print_next++;
         }
         if (node->right != NULL) {
-            for (i=0; i<(x-print_next+(level)); i++) {
+            for (i = 0; i < (x - print_next + (level)); i++) {
                 printf(" ");
             }
 
@@ -184,27 +182,27 @@ void print_level(asciinode *node, int x, int level) {
             print_next++;
         }
     } else {
-        print_level(node->left, x-node->edge_length-1, level-node->edge_length-1);
-        print_level(node->right, x+node->edge_length+1, level-node->edge_length-1);
+        print_level(node->left, x - node->edge_length - 1, level - node->edge_length - 1);
+        print_level(node->right, x + node->edge_length + 1, level - node->edge_length - 1);
     }
 }
 
-void print_ascii_tree(tree * t) {
-    if (t == NULL) 
+void print_ascii_tree(tree *t) {
+    if (t == NULL)
         return;
-    
+
     asciinode *proot;
     int xmin, i;
     proot = build_ascii_tree(t);
     compute_edge_lengths(proot);
 
-    for (i=0; i<proot->height && i < MAX_HEIGHT; i++) {
+    for (i = 0; i < proot->height && i < MAX_HEIGHT; i++) {
         lprofile[i] = INFINITY;
     }
 
     compute_lprofile(proot, 0, 0);
     xmin = 0;
-    
+
     for (i = 0; i < proot->height && i < MAX_HEIGHT; i++) {
         xmin = MIN(xmin, lprofile[i]);
     }
@@ -217,5 +215,5 @@ void print_ascii_tree(tree * t) {
         printf("(This tree is taller than %d, and may be drawn incorrectly.)\n", MAX_HEIGHT);
     }
 
-    free_ascii_tree(proot); 
+    free_ascii_tree(proot);
 }

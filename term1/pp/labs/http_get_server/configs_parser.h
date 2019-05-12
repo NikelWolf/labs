@@ -21,20 +21,20 @@ typedef struct server_configs_s {
 } server_configs;
 
 typedef enum ServerConfigsField_e {
-    SHUTDOWN_KEYWORD, 
-    LOG_FILE, 
-    SERVER_ROOT, 
-    STANDART, 
-    NOT_EXIST, 
-    FORBIDDEN, 
-    BAD_REQUEST, 
-    NOT_IMPLEMENTED, 
-    PORT, 
+    SHUTDOWN_KEYWORD,
+    LOG_FILE,
+    SERVER_ROOT,
+    STANDART,
+    NOT_EXIST,
+    FORBIDDEN,
+    BAD_REQUEST,
+    NOT_IMPLEMENTED,
+    PORT,
     BACKLOG
 } ServerConfigsField;
 
-#include "utils.h"
 #include "string_worker.h"
+#include "utils.h"
 
 server_configs *create_server_configs();
 void free_server_configs(server_configs *sc);

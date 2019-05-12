@@ -11,7 +11,7 @@ main: main.o
 	$(CC) -o $(PROGRAM) $(OBJECTS)
 
 main.o: main.cpp
-	$(CC) -c main.cpp $(CFALGS)
+	$(CC) -c main.cpp $(CFLAGS)
 
 clean:
 	$(RM) $(PROGRAM) $(OBJECTS)
