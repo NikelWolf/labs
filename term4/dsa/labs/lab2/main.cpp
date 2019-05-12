@@ -12,7 +12,7 @@ private:
         Node *parent;
 
         Node(N value, Node *parent) {
-            value = value;
+            this->value = value;
             parent = parent;
             left = nullptr;
             right = nullptr;

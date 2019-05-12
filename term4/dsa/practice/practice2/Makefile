@@ -5,12 +5,12 @@ CC=kotlinc
 
 .PHONY: all clean
 
-all: main
+all: run
 
 main:
 	$(CC) $(OBJECTS) $(CFLAGS) $(PROGRAM).jar
 
-run:
+run: main
 	java -jar $(PROGRAM).jar
 
 clean:
